@@ -1,0 +1,28 @@
+{
+  "name": "tmg",
+  "description": "Timer generator",
+  "version": "0.0.0",
+  "keywords": [
+    "timer",
+    "generator"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/andrepolischuk/tmg.git"
+  },
+  "dependencies": {
+    "ea": "^0.3.1",
+    "commander": "^2.7.1",
+    "component-type": "^1.1.0",
+    "moment": "^2.9.0"
+  },
+  "devDependencies": {
+    "mocha": "^2.1.0"
+  },
+  "main": "index.js",
+  "bin": {
+    "tmg": "bin/tmg"
+  },
+  "author": "Andrey Polischuk <andre.polischuk@gmail.com>",
+  "license": "MIT"
+}
