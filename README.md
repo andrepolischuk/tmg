@@ -7,7 +7,7 @@
   UMD:
 
 ```html
-<script src="https://cdn.rawgit.com/andrepolischuk/tmg/0.0.0/tmg.min.js"></script>
+<script src="https://cdn.rawgit.com/andrepolischuk/tmg/0.1.0/tmg.min.js"></script>
 ```
 
   Component(1):
@@ -30,6 +30,7 @@ $ npm install tmg
 
 ```js
 var timer = tmg()
+var timer = tmg(new Date(2018, 05, 01, 12, 0, 0))
 ```
 
 ### Timer
@@ -39,7 +40,7 @@ var timer = tmg()
   Set format string
 
 ```js
-var timer = tmg().format('h:m:s');
+var timer = tmg().format('h:m:s')
 ```
 
   Can be used:

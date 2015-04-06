@@ -8,17 +8,26 @@ describe('tmg', function() {
   });
 });
 
-describe('tmg()', function() {
-  var timer = tmg();
-  var sec = timer.obj().s;
+var timer = tmg().format('m:s');
+var sec = timer.obj().s;
 
+describe('tmg()', function() {
   it('should be a timer', function(done) {
     setTimeout(function() {
       assert(timer.obj().s > sec);
       done();
     }, 1000);
   });
+});
 
+describe('Timer#format(str)', function() {
+  it('should set format string', function() {
+    timer.format('h:m:s');
+    assert(timer._format === 'h:m:s');
+  });
+});
+
+describe('Timer#obj()', function() {
   it('should return object', function() {
     var obj = timer.obj();
     assert(typeof obj === 'object');
@@ -26,13 +35,17 @@ describe('tmg()', function() {
     assert('m' in obj);
     assert('s' in obj);
   });
+});
 
+describe('Timer#arr()', function() {
   it('should return array', function() {
     var arr = timer.arr();
     assert(typeof arr === 'object');
     assert(arr.length === 3);
   });
+});
 
+describe('Timer#str()', function() {
   it('should return string', function() {
     var str = timer.str();
     assert(typeof str === 'string');
