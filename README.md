@@ -2,6 +2,8 @@
 
   Timer generator
 
+  [![Build Status](https://travis-ci.org/andrepolischuk/tmg.svg?branch=master)](https://travis-ci.org/andrepolischuk/tmg)
+
 ## Instalation
 
   UMD:

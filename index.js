@@ -44,6 +44,7 @@ module.exports = Timer;
 
 /**
  * Timer
+ *
  * @param {Date} date
  * @return {Object}
  * @api public
@@ -59,6 +60,7 @@ function Timer(date) {
 
 /**
  * Set format string
+ *
  * @param {String} str
  * @return {Object}
  * @api public
@@ -71,6 +73,7 @@ Timer.prototype.format = function(str) {
 
 /**
  * Start timer interval
+ *
  * @param  {Function} fn
  * @return {Object}
  * @api public
@@ -94,6 +97,7 @@ Timer.prototype.start = function(fn) {
 
 /**
  * Clear timer interval
+ *
  * @return {Object}
  * @api public
  */
@@ -105,6 +109,7 @@ Timer.prototype.end = function() {
 
 /**
  * Current time object
+ *
  * @param {String} str
  * @return {Object}
  * @api public
@@ -127,6 +132,7 @@ Timer.prototype.obj = function(str) {
 
 /**
  * Current time array
+ *
  * @param {String} str
  * @return {Array}
  * @api public
@@ -145,6 +151,7 @@ Timer.prototype.arr = function(str) {
 
 /**
  * Current time string
+ *
  * @param {String} str
  * @return {String}
  * @api public
