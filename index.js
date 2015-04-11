@@ -80,6 +80,7 @@ Timer.prototype.format = function(str) {
  */
 
 Timer.prototype.start = function(fn) {
+  if (this._running) return this;
   this._running = true;
   var self = this;
 
