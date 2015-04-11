@@ -27,6 +27,33 @@ describe('Timer#format(str)', function() {
   });
 });
 
+describe('Timer#start(fn)', function() {
+  it('should set timer interval', function(done) {
+    tmg().start(function() {
+      assert(this.obj().s === 1);
+      this.end();
+      done();
+    });
+  });
+});
+
+describe('Timer#end()', function() {
+  it('should clear timer interval', function(done) {
+    this.timeout(3000);
+    var seconds = 0;
+
+    tmg().start(function() {
+      seconds = this.obj().s;
+      this.end();
+    });
+
+    setTimeout(function() {
+      assert(seconds === 1);
+      done();
+    }, 2500);
+  });
+});
+
 describe('Timer#obj()', function() {
   it('should return object', function() {
     var obj = timer.obj();

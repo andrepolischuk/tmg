@@ -54,6 +54,7 @@ function Timer(date) {
   if (type(date) !== 'date') return new Timer(new Date);
   this._date = date;
   this._format = format;
+  this._running = false;
 }
 
 /**
@@ -65,6 +66,40 @@ function Timer(date) {
 
 Timer.prototype.format = function(str) {
   this._format = str;
+  return this;
+};
+
+/**
+ * Start timer interval
+ * @param  {Function} fn
+ * @return {Object}
+ * @api public
+ */
+
+Timer.prototype.start = function(fn) {
+  this._running = true;
+  var self = this;
+
+  function next() {
+    setTimeout(function() {
+      if (!self._running) return;
+      fn.call(self);
+      next();
+    }, 1000);
+  }
+
+  next();
+  return this;
+};
+
+/**
+ * Clear timer interval
+ * @return {Object}
+ * @api public
+ */
+
+Timer.prototype.end = function() {
+  this._running = false;
   return this;
 };
 
