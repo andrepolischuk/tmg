@@ -52,7 +52,7 @@ module.exports = Timer;
 
 function Timer(date) {
   if (!(this instanceof Timer)) return new Timer(date);
-  if (type(date) !== 'date') return new Timer(new Date);
+  if (type(date) !== 'date') return new Timer(new Date());
   this._date = date;
   this._format = format;
   this._running = false;
@@ -117,7 +117,7 @@ Timer.prototype.end = function() {
 
 Timer.prototype.obj = function(str) {
   str = str || this._format;
-  var cur = abs((new Date).valueOf() - this._date.valueOf());
+  var cur = abs((new Date()).valueOf() - this._date.valueOf());
   var time = {};
 
   each.reverse(map, function(mult, prop) {
