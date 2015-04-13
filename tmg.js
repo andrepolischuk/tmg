@@ -140,6 +140,7 @@ module.exports = Timer;
 
 /**
  * Timer
+ *
  * @param {Date} date
  * @return {Object}
  * @api public
@@ -147,13 +148,15 @@ module.exports = Timer;
 
 function Timer(date) {
   if (!(this instanceof Timer)) return new Timer(date);
-  if (type(date) !== 'date') return new Timer(new Date);
+  if (type(date) !== 'date') return new Timer(new Date());
   this._date = date;
   this._format = format;
+  this._running = false;
 }
 
 /**
  * Set format string
+ *
  * @param {String} str
  * @return {Object}
  * @api public
@@ -165,7 +168,45 @@ Timer.prototype.format = function(str) {
 };
 
 /**
+ * Start timer interval
+ *
+ * @param  {Function} fn
+ * @return {Object}
+ * @api public
+ */
+
+Timer.prototype.start = function(fn) {
+  if (this._running) return this;
+  this._running = true;
+  var self = this;
+
+  function next() {
+    setTimeout(function() {
+      if (!self._running) return;
+      fn.call(self);
+      next();
+    }, 1000);
+  }
+
+  next();
+  return this;
+};
+
+/**
+ * Clear timer interval
+ *
+ * @return {Object}
+ * @api public
+ */
+
+Timer.prototype.end = function() {
+  this._running = false;
+  return this;
+};
+
+/**
  * Current time object
+ *
  * @param {String} str
  * @return {Object}
  * @api public
@@ -173,7 +214,7 @@ Timer.prototype.format = function(str) {
 
 Timer.prototype.obj = function(str) {
   str = str || this._format;
-  var cur = abs((new Date).valueOf() - this._date.valueOf());
+  var cur = abs((new Date()).valueOf() - this._date.valueOf());
   var time = {};
 
   each.reverse(map, function(mult, prop) {
@@ -188,6 +229,7 @@ Timer.prototype.obj = function(str) {
 
 /**
  * Current time array
+ *
  * @param {String} str
  * @return {Array}
  * @api public
@@ -206,6 +248,7 @@ Timer.prototype.arr = function(str) {
 
 /**
  * Current time string
+ *
  * @param {String} str
  * @return {String}
  * @api public

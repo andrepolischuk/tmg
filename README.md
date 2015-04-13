@@ -6,12 +6,6 @@
 
 ## Instalation
 
-  UMD:
-
-```html
-<script src="https://cdn.rawgit.com/andrepolischuk/tmg/0.1.0/tmg.min.js"></script>
-```
-
   Component(1):
 
 ```sh
@@ -22,6 +16,12 @@ $ component install andrepolischuk/tmg
 
 ```sh
 $ npm install tmg
+```
+
+  Umd:
+
+```html
+<script src="https://cdn.rawgit.com/andrepolischuk/tmg/0.2.0/tmg.min.js"></script>
 ```
 
 ## API
@@ -51,6 +51,21 @@ var timer = tmg().format('h:m:s')
   * `h` - hours
   * `m` - minutes
   * `s` - seconds
+
+#### Timer.start(fn)
+
+  Start timer interval
+
+```js
+timer.start(function() {
+  this.str()
+  // '12:00:10'
+})
+```
+
+#### Timer.end()
+
+  Clear timer interval
 
 #### Timer.obj([str])
 

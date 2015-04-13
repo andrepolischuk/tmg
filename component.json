@@ -1,14 +1,14 @@
 {
   "name": "tmg",
   "description": "Timer generator",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "keywords": [
     "timer",
     "generator"
   ],
   "repository": "andrepolischuk/tmg",
   "dependencies": {
-    "andrepolischuk/ea": "^0.3.1",
+    "andrepolischuk/ea": "^0.3.2",
     "component/type": "^1.1.0"
   },
   "development": {
