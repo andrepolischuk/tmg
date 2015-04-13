@@ -1,0 +1,8 @@
+
+@import 'twbs/bootstrap:dist/css/bootstrap.min.css';
+
+body {
+  background-color: #fff;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
