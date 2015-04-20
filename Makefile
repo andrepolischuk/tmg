@@ -10,8 +10,10 @@ clean:
 node_modules: package.json
 	@npm install
 
-bundle: index.js
-	@duo --standalone tmg --stdout index.js > tmg.js
-	@uglifyjs tmg.js --mangle --compress --output tmg.min.js
+tmg.js: node_modules index.js
+	@node_modules/.bin/duo --standalone tmg --stdout index.js > $@
+
+tmg.min.js: tmg.js
+	@node_modules/.bin/uglifyjs $< --mangle --compress --output $@
 
 .PHONY: clean test
