@@ -89,7 +89,7 @@
 
 'use strict';
 
-var tmg = require('andrepolischuk/tmg@0.2.0');
+var tmg = require('andrepolischuk/tmg@0.3.0');
 
 var cyear = document.querySelector('#cyear');
 var nyear = document.querySelector('#nyear');
@@ -98,19 +98,15 @@ var page = document.querySelector('#page');
 var year = (new Date()).getFullYear();
 
 tmg(new Date(year, 0, 1))
-  .format('d h:m:s')
+  .format('{d} days {h}:{m}:{s}')
   .start(function() {
-    var time = this.obj();
-    cyear.innerHTML = time.d + ' ' + (time.d > 1 ? 'days' : 'day') +
-      ' ' + digits2(time.h) + ':' + digits2(time.m) + ':' + digits2(time.s);
+    cyear.innerHTML = this.str();
   });
 
 tmg(new Date(year + 1, 0, 1))
-  .format('d h:m:s')
+  .format('{d} days {h}:{m}:{s}')
   .start(function() {
-    var time = this.obj();
-    nyear.innerHTML = time.d + ' ' + (time.d > 1 ? 'days' : 'day') +
-      ' ' + digits2(time.h) + ':' + digits2(time.m) + ':' + digits2(time.s);
+    nyear.innerHTML = this.str();
   });
 
 tmg().start(function() {
@@ -121,7 +117,7 @@ function digits2(val) {
   return val < 10 ? '0' + val : val;
 }
 
-}, {"andrepolischuk/tmg@0.2.0":2}],
+}, {"andrepolischuk/tmg@0.3.0":2}],
 2: [function(require, module, exports) {
 
 'use strict';
@@ -149,7 +145,7 @@ var floor = Math.floor;
  * Def fmt string
  */
 
-var format = 'h:m:s';
+var format = '{h}:{m}:{s}';
 
 /**
  * Time props map
@@ -210,11 +206,9 @@ Timer.prototype.start = function(fn) {
   var self = this;
 
   function next() {
-    setTimeout(function() {
-      if (!self._running) return;
-      fn.call(self);
-      next();
-    }, 1000);
+    if (!self._running) return;
+    fn.call(self);
+    setTimeout(next, 1000);
   }
 
   next();
@@ -247,7 +241,7 @@ Timer.prototype.obj = function(str) {
   var time = {};
 
   each.reverse(map, function(mult, prop) {
-    if (str.indexOf(prop) > -1) {
+    if (str.indexOf('{' + prop + '}') > -1) {
       time[prop] = floor(cur / mult);
       cur -= time[prop] * mult;
     }
@@ -288,9 +282,8 @@ Timer.prototype.str = function(str) {
   var time = str || this._format;
 
   each(cur, function(val, prop) {
-    val += '';
-    if (/(h|m|s)/.test(prop)) val = (val.length < 2 ? '0' : '') + val;
-    time = time.replace(new RegExp('(' + prop + ')', 'g'), val);
+    val = /(h|m|s)/.test(prop) && val < 10 ? '0' + val : val;
+    time = time.replace(new RegExp('{' + prop + '}', 'g'), val);
   });
 
   return time;

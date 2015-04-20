@@ -1,10 +1,10 @@
 
-default: bundle
+default: build
 
 clean:
 	@rm -rf build components node_modules
 
-bundle: index.js index.css
+build: index.js index.css
 	@duo index.js index.css
 
 .PHONY: clean bundle
