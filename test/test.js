@@ -8,7 +8,7 @@ describe('tmg', function() {
   });
 });
 
-var timer = tmg().format('m:s');
+var timer = tmg().format('{m}:{s}');
 var sec = timer.obj().s;
 
 describe('tmg()', function() {
@@ -22,8 +22,8 @@ describe('tmg()', function() {
 
 describe('Timer#format(str)', function() {
   it('should set format string', function() {
-    timer.format('h:m:s');
-    assert(timer._format === 'h:m:s');
+    timer.format('{h}:{m}:{s}');
+    assert(timer._format === '{h}:{m}:{s}');
   });
 });
 

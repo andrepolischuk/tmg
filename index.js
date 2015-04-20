@@ -24,7 +24,7 @@ var floor = Math.floor;
  * Def fmt string
  */
 
-var format = 'h:m:s';
+var format = '{h}:{m}:{s}';
 
 /**
  * Time props map
@@ -120,7 +120,7 @@ Timer.prototype.obj = function(str) {
   var time = {};
 
   each.reverse(map, function(mult, prop) {
-    if (str.indexOf(prop) > -1) {
+    if (str.indexOf('{' + prop + '}') > -1) {
       time[prop] = floor(cur / mult);
       cur -= time[prop] * mult;
     }
@@ -161,9 +161,8 @@ Timer.prototype.str = function(str) {
   var time = str || this._format;
 
   each(cur, function(val, prop) {
-    val += '';
-    if (/(h|m|s)/.test(prop)) val = (val.length < 2 ? '0' : '') + val;
-    time = time.replace(new RegExp('(' + prop + ')', 'g'), val);
+    val = /(h|m|s)/.test(prop) && val < 10 ? '0' + val : val;
+    time = time.replace(new RegExp('{' + prop + '}', 'g'), val);
   });
 
   return time;

@@ -75,7 +75,7 @@ if (args.length === 1) {
  * Timer
  */
 
-var timer = tmg(date.toDate()).format('h:m:s');
+var timer = tmg(date.toDate()).format('{h}:{m}:{s}');
 
 /**
  * Print
