@@ -1,8 +1,6 @@
-# Tmg
+# tmg [![Build Status](https://travis-ci.org/andrepolischuk/tmg.svg?branch=master)](https://travis-ci.org/andrepolischuk/tmg)
 
   Timer generator
-
-  [![Build Status](https://travis-ci.org/andrepolischuk/tmg.svg?branch=master)](https://travis-ci.org/andrepolischuk/tmg)
 
 ## Instalation
 
@@ -21,7 +19,7 @@ $ npm install tmg
   Umd:
 
 ```html
-<script src="https://cdn.rawgit.com/andrepolischuk/tmg/0.2.0/tmg.min.js"></script>
+<script src="https://cdn.rawgit.com/andrepolischuk/tmg/0.3.0/tmg.js"></script>
 ```
 
 ## API
@@ -42,7 +40,7 @@ var timer = tmg(new Date(2018, 05, 01, 12, 0, 0))
   Set format string
 
 ```js
-var timer = tmg().format('h:m:s')
+var timer = tmg().format('{h}:{m}:{s}')
 ```
 
   Can be used:
