@@ -29,11 +29,17 @@ describe('Timer#format(str)', function() {
 
 describe('Timer#start(fn)', function() {
   it('should set timer interval', function(done) {
+    var seconds = 0;
+
     tmg().start(function() {
-      assert(this.obj().s === 1);
-      this.end();
-      done();
+      seconds = this.obj().s;
+      if (seconds === 1) this.end();
     });
+
+    setTimeout(function() {
+      assert(seconds === 1);
+      done();
+    }, 1500);
   });
 });
 
@@ -44,7 +50,7 @@ describe('Timer#end()', function() {
 
     tmg().start(function() {
       seconds = this.obj().s;
-      this.end();
+      if (seconds === 1) this.end();
     });
 
     setTimeout(function() {

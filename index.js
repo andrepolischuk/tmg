@@ -85,11 +85,9 @@ Timer.prototype.start = function(fn) {
   var self = this;
 
   function next() {
-    setTimeout(function() {
-      if (!self._running) return;
-      fn.call(self);
-      next();
-    }, 1000);
+    if (!self._running) return;
+    fn.call(self);
+    setTimeout(next, 1000);
   }
 
   next();
