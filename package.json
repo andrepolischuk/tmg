@@ -8,7 +8,7 @@
   ],
   "repository": "andrepolischuk/tmg",
   "dependencies": {
-    "ea": "^0.3.2",
+    "ea": "^0.4.0",
     "commander": "^2.7.1",
     "component-type": "^1.1.0",
     "moment": "^2.9.0"
