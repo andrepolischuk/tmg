@@ -6,10 +6,7 @@
     "timer",
     "generator"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/andrepolischuk/tmg.git"
-  },
+  "repository": "andrepolischuk/tmg",
   "dependencies": {
     "ea": "^0.3.2",
     "commander": "^2.7.1",
@@ -17,9 +14,7 @@
     "moment": "^2.9.0"
   },
   "devDependencies": {
-    "duo": "^0.10.0",
-    "mocha": "^2.2.4",
-    "uglifyjs": "^2.4.0"
+    "mocha": "^2.2.4"
   },
   "browser": {
     "commander": false,
@@ -29,6 +24,9 @@
   "main": "index.js",
   "bin": {
     "tmg": "bin/tmg"
+  },
+  "scripts": {
+    "test": "mocha"
   },
   "author": "Andrey Polischuk <andre.polischuk@gmail.com>",
   "license": "MIT"

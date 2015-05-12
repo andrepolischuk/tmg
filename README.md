@@ -1,36 +1,23 @@
 # tmg [![Build Status](https://travis-ci.org/andrepolischuk/tmg.svg?branch=master)](https://travis-ci.org/andrepolischuk/tmg)
 
-  Timer generator
+  > Timer generator
 
 ## Instalation
 
-  Component(1):
-
 ```sh
+$ npm install --save tmg
 $ component install andrepolischuk/tmg
-```
-
-  Npm:
-
-```sh
-$ npm install tmg
-```
-
-  Umd:
-
-```html
-<script src="https://cdn.rawgit.com/andrepolischuk/tmg/0.3.0/tmg.js"></script>
 ```
 
 ## API
 
 ### tmg([date])
 
-  Return [Timer](#timer)
+  Return timer
 
 ```js
-var timer = tmg()
-var timer = tmg(new Date(2018, 05, 01, 12, 0, 0))
+var timer = tmg();
+var timer = tmg(new Date(2018, 05, 01, 12, 0, 0));
 ```
 
 ### Timer
@@ -40,7 +27,7 @@ var timer = tmg(new Date(2018, 05, 01, 12, 0, 0))
   Set format string
 
 ```js
-var timer = tmg().format('{h}:{m}:{s}')
+var timer = tmg().format('{h}:{m}:{s}');
 ```
 
   Can be used:
@@ -56,8 +43,7 @@ var timer = tmg().format('{h}:{m}:{s}')
 
 ```js
 timer.start(function() {
-  this.str()
-  // '12:00:10'
+  this.str(); // '12:00:10'
 })
 ```
 
@@ -70,8 +56,7 @@ timer.start(function() {
   Return object with current timer value
 
 ```js
-timer.obj()
-// {h: 12, m: 0, s: 10}
+timer.obj(); // {h: 12, m: 0, s: 10}
 ```
 
 #### Timer.arr([str])
@@ -79,8 +64,7 @@ timer.obj()
   Return object with current timer value
 
 ```js
-timer.arr()
-// [12, 0, 10]
+timer.arr(); // [12, 0, 10]
 ```
 
 #### Timer.str([str])
@@ -88,30 +72,35 @@ timer.arr()
   Return string with current timer value
 
 ```js
-timer.str()
-// '12:00:10'
+timer.str(); // '12:00:10'
 ```
 
-## Use
+## CLI
 
 ```sh
-Usage: tmg [date] [time]
+$ npm install --global tmg
+```
 
-Options:
+```
+$ tmg --help
 
-  -h, --help     output usage information
-  -V, --version  output the version number  
+  Usage: tmg [date] [time]
 
-Examples:
+  Options:
 
-  # start timer with current time
-  $ tmg
+    -h, --help     output usage information
+    -V, --version  output the version number  
 
-  # start timer with specified time
-  $ tmg 12:15
+  Examples:
 
-  # start timer with specified date and time
-  $ tmg 2015.02.11 12:00:00
+    # start timer with current time
+    $ tmg
+
+    # start timer with specified time
+    $ tmg 12:15
+
+    # start timer with specified date and time
+    $ tmg 2015.02.11 12:00:00
 ```
 
 ## License
