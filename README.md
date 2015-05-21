@@ -6,6 +6,9 @@
 
 ```sh
 $ npm install --save tmg
+```
+
+```sh
 $ component install andrepolischuk/tmg
 ```
 
