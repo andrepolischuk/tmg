@@ -1,7 +1,7 @@
 
 'use strict';
 
-var tmg = require('andrepolischuk/tmg@0.3.0');
+var tmg = require('tmg');
 
 var cyear = document.querySelector('#cyear');
 var nyear = document.querySelector('#nyear');

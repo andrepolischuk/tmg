@@ -1,95 +1,8 @@
-(function outer(modules, cache, entries){
-
-  /**
-   * Global
-   */
-
-  var global = (function(){ return this; })();
-
-  /**
-   * Require `name`.
-   *
-   * @param {String} name
-   * @param {Boolean} jumped
-   * @api public
-   */
-
-  function require(name, jumped){
-    if (cache[name]) return cache[name].exports;
-    if (modules[name]) return call(name, require);
-    throw new Error('cannot find module "' + name + '"');
-  }
-
-  /**
-   * Call module `id` and cache it.
-   *
-   * @param {Number} id
-   * @param {Function} require
-   * @return {Function}
-   * @api private
-   */
-
-  function call(id, require){
-    var m = { exports: {} };
-    var mod = modules[id];
-    var name = mod[2];
-    var fn = mod[0];
-
-    fn.call(m.exports, function(req){
-      var dep = modules[id][1][req];
-      return require(dep || req);
-    }, m, m.exports, outer, modules, cache, entries);
-
-    // store to cache after successful resolve
-    cache[id] = m;
-
-    // expose as `name`.
-    if (name) cache[name] = cache[id];
-
-    return cache[id].exports;
-  }
-
-  /**
-   * Require all entries exposing them on global if needed.
-   */
-
-  for (var id in entries) {
-    if (entries[id]) {
-      global[entries[id]] = require(id);
-    } else {
-      require(id);
-    }
-  }
-
-  /**
-   * Duo flag.
-   */
-
-  require.duo = true;
-
-  /**
-   * Expose cache.
-   */
-
-  require.cache = cache;
-
-  /**
-   * Expose modules
-   */
-
-  require.modules = modules;
-
-  /**
-   * Return newest require.
-   */
-
-   return require;
-})({
-1: [function(require, module, exports) {
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 
 'use strict';
 
-var tmg = require('andrepolischuk/tmg@0.3.0');
+var tmg = require('tmg');
 
 var cyear = document.querySelector('#cyear');
 var nyear = document.querySelector('#nyear');
@@ -117,8 +30,7 @@ function digits2(val) {
   return val < 10 ? '0' + val : val;
 }
 
-}, {"andrepolischuk/tmg@0.3.0":2}],
-2: [function(require, module, exports) {
+},{"tmg":2}],2:[function(require,module,exports){
 
 'use strict';
 
@@ -289,157 +201,7 @@ Timer.prototype.str = function(str) {
   return time;
 };
 
-}, {"ea":3,"type":4,"component-type":4}],
-3: [function(require, module, exports) {
-
-'use strict';
-
-/**
- * Module dependencies
- */
-
-try {
-  var type = require('type');
-} catch (err) {
-  var type = require('component-type');
-}
-
-/**
- * Has own property
- */
-
-var has = Object.prototype.hasOwnProperty;
-
-/**
- * Expose direct iterate
- */
-
-module.exports = each;
-
-/**
- * Expose reverse iterate
- * @param {Object|Array} obj
- * @param {Function} fn
- * @return {Function}
- * @api public
- */
-
-module.exports.reverse = function(obj, fn) {
-  return each(obj, fn, 'reverse');
-};
-
-/**
- * Iteration router
- * @param {Object|Array} obj
- * @param {Function} fn
- * @return {Function}
- * @api public
- */
-
-function each(obj, fn, direction) {
-  if (typeof fn === 'function') {
-    switch (type(obj)) {
-      case 'array':
-        return (array[direction] || array)(obj, fn);
-      case 'object':
-        if (type(obj.length) === 'number') {
-          return (array[direction] || array)(obj, fn);
-        }
-        return (object[direction] || object)(obj, fn);
-      case 'string':
-        return (string[direction] || string)(obj, fn);
-    }
-  }
-}
-
-/**
- * Iterate array
- * @param {Array} obj
- * @param {Function} fn
- * @api private
- */
-
-function array(obj, fn) {
-  for (var i = 0; i < obj.length; i++) {
-    fn(obj[i], i);
-  }
-}
-
-/**
- * Iterate array in reverse order
- * @param {Array} obj
- * @param {Function} fn
- * @api private
- */
-
-array.reverse = function(obj, fn) {
-  for (var i = obj.length - 1; i >= 0 ; i--) {
-    fn(obj[i], i);
-  }
-};
-
-/**
- * Iterate object
- * @param {Object} obj
- * @param {Function} fn
- * @api private
- */
-
-function object(obj, fn) {
-  for (var i in obj) {
-    if (has.call(obj, i)) {
-      fn(obj[i], i);
-    }
-  }
-}
-
-/**
- * Iterate object in reverse order
- * @param {Object} obj
- * @param {Function} fn
- * @api private
- */
-
-object.reverse = function(obj, fn) {
-  var keys = [];
-  for (var k in obj) {
-    if (has.call(obj, k)) {
-      keys.push(k);
-    }
-  }
-  for (var i = keys.length - 1; i >= 0; i--) {
-    fn(obj[keys[i]], keys[i]);
-  }
-};
-
-/**
- * Iterate string
- * @param {Array} obj
- * @param {Function} fn
- * @api private
- */
-
-function string(obj, fn) {
-  for (var i = 0; i < obj.length; i++) {
-    fn(obj.charAt(i), i);
-  }
-}
-
-/**
- * Iterate string in reverse order
- * @param {Array} obj
- * @param {Function} fn
- * @api private
- */
-
-string.reverse = function(obj, fn) {
-  for (var i = obj.length - 1; i >= 0 ; i--) {
-    fn(obj.charAt(i), i);
-  }
-};
-
-}, {"type":4,"component-type":4}],
-4: [function(require, module, exports) {
+},{"component-type":3,"ea":4,"type":3}],3:[function(require,module,exports){
 /**
  * toString ref.
  */
@@ -475,4 +237,160 @@ module.exports = function(val){
   return typeof val;
 };
 
-}, {}]}, {}, {"1":""})
+},{}],4:[function(require,module,exports){
+
+'use strict';
+
+/**
+ * Module dependencies
+ */
+
+try {
+  var type = require('type');
+} catch (err) {
+  var type = require('component-type');
+}
+
+/**
+ * Has own property
+ */
+
+var has = Object.prototype.hasOwnProperty;
+
+/**
+ * Expose direct iterate
+ */
+
+module.exports = each;
+
+/**
+ * Expose reverse iterate
+ *
+ * @param {Object|Array} obj
+ * @param {Function} fn
+ * @return {Function}
+ * @api public
+ */
+
+module.exports.reverse = function(obj, fn) {
+  return each(obj, fn, 'reverse');
+};
+
+/**
+ * Iteration router
+ *
+ * @param {Object|Array} obj
+ * @param {Function} fn
+ * @return {Function}
+ * @api public
+ */
+
+function each(obj, fn, direction) {
+  if (typeof fn === 'function') {
+    switch (type(obj)) {
+      case 'array':
+        return (array[direction] || array)(obj, fn);
+      case 'object':
+        if (type(obj.length) === 'number') {
+          return (array[direction] || array)(obj, fn);
+        }
+        return (object[direction] || object)(obj, fn);
+      case 'string':
+        return (string[direction] || string)(obj, fn);
+    }
+  }
+}
+
+/**
+ * Iterate array
+ *
+ * @param {Array} obj
+ * @param {Function} fn
+ * @api private
+ */
+
+function array(obj, fn) {
+  for (var i = 0; i < obj.length; i++) {
+    fn(obj[i], i);
+  }
+}
+
+/**
+ * Iterate array in reverse order
+ *
+ * @param {Array} obj
+ * @param {Function} fn
+ * @api private
+ */
+
+array.reverse = function(obj, fn) {
+  for (var i = obj.length - 1; i >= 0; i--) {
+    fn(obj[i], i);
+  }
+};
+
+/**
+ * Iterate object
+ *
+ * @param {Object} obj
+ * @param {Function} fn
+ * @api private
+ */
+
+function object(obj, fn) {
+  for (var i in obj) {
+    if (has.call(obj, i)) {
+      fn(obj[i], i);
+    }
+  }
+}
+
+/**
+ * Iterate object in reverse order
+ *
+ * @param {Object} obj
+ * @param {Function} fn
+ * @api private
+ */
+
+object.reverse = function(obj, fn) {
+  var keys = [];
+  for (var k in obj) {
+    if (has.call(obj, k)) {
+      keys.push(k);
+    }
+  }
+  for (var i = keys.length - 1; i >= 0; i--) {
+    fn(obj[keys[i]], keys[i]);
+  }
+};
+
+/**
+ * Iterate string
+ *
+ * @param {Array} obj
+ * @param {Function} fn
+ * @api private
+ */
+
+function string(obj, fn) {
+  for (var i = 0; i < obj.length; i++) {
+    fn(obj.charAt(i), i);
+  }
+}
+
+/**
+ * Iterate string in reverse order
+ *
+ * @param {Array} obj
+ * @param {Function} fn
+ * @api private
+ */
+
+string.reverse = function(obj, fn) {
+  for (var i = obj.length - 1; i >= 0; i--) {
+    fn(obj.charAt(i), i);
+  }
+};
+
+},{"component-type":3,"type":3}]},{},[1]);

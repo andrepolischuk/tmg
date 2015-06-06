@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Tmg</title>
+  <title>tmg</title>
   <link href="build/index.css" rel="stylesheet">
   <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -11,26 +11,33 @@
   <![endif]-->
 </head>
 <body>
-  <div class="container">
-    <div class="page-header">
-      <h2>
-        Tmg
-        <small><a href="https://github.com/andrepolischuk/tmg">Github</a></small>
-      </h2>
-    </div>
-    <div class="row">
-      <div class="col-sm-12 text-center">
-        <h3>Since the beginning of the year has passed</h3>
-        <h1 id="cyear"></h1>
-        <br>
-        <h3>New year will come in</h3>
-        <h1 id="nyear"></h1>
-        <br>
-        <h3>On this page you are a</h3>
-        <h1 id="page"></h1>
-      </div>
+  <div class="jumbotron">
+    <div class="container">
+      <h1>
+        tmg
+      </h1>
+      <p>
+        Timer generator
+      </p>
+      <p class="text-muted">
+        0.4.1
+        &middot;
+        <a href="https://github.com/andrepolischuk/tmg">GitHub</a>
+      </p>
     </div>
   </div>
+
+  <div class="container">
+    <h3 class="page-header">Since the beginning of the year has passed</h3>
+    <h1 id="cyear"></h1>
+
+    <h3 class="page-header">New year will come in</h3>
+    <h1 id="nyear"></h1>
+
+    <h3 class="page-header">On this page you are a</h3>
+    <h1 id="page"></h1>
+  </div>
+
   <script src="build/index.js"></script>
 </body>
 </html>
