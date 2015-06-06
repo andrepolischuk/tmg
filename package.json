@@ -22,7 +22,7 @@
     "type": "component-type"
   },
   "main": "index.js",
-  "bin": "bin/tmg",
+  "bin": "cli.js",
   "scripts": {
     "test": "mocha"
   },

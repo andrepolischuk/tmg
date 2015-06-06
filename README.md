@@ -2,14 +2,14 @@
 
   > Timer generator
 
-## Instalation
+## Install
 
 ```sh
-$ npm install --save tmg
+npm install --save tmg
 ```
 
 ```sh
-$ component install andrepolischuk/tmg
+component install andrepolischuk/tmg
 ```
 
 ## API
@@ -23,9 +23,7 @@ var timer = tmg();
 var timer = tmg(new Date(2018, 05, 01, 12, 0, 0));
 ```
 
-### Timer
-
-#### Timer#format(str)
+### .format(str)
 
   Set format string
 
@@ -40,7 +38,7 @@ var timer = tmg().format('{h}:{m}:{s}');
   * `m` - minutes
   * `s` - seconds
 
-#### Timer.start(fn)
+### .start(fn)
 
   Start timer interval
 
@@ -50,11 +48,11 @@ timer.start(function() {
 })
 ```
 
-#### Timer.end()
+### .end()
 
   Clear timer interval
 
-#### Timer.obj([str])
+### .obj([str])
 
   Return object with current timer value
 
@@ -62,7 +60,7 @@ timer.start(function() {
 timer.obj(); // {h: 12, m: 0, s: 10}
 ```
 
-#### Timer.arr([str])
+### .arr([str])
 
   Return object with current timer value
 
@@ -70,7 +68,7 @@ timer.obj(); // {h: 12, m: 0, s: 10}
 timer.arr(); // [12, 0, 10]
 ```
 
-#### Timer.str([str])
+### .str([str])
 
   Return string with current timer value
 
@@ -81,11 +79,11 @@ timer.str(); // '12:00:10'
 ## CLI
 
 ```sh
-$ npm install --global tmg
+npm install --global tmg
 ```
 
 ```
-$ tmg --help
+tmg --help
 
   Usage: tmg [date] [time]
 

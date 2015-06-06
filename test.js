@@ -1,7 +1,7 @@
 
 'use strict';
 
-var tmg = require('..');
+var tmg = require('./');
 var assert = require('assert');
 
 describe('tmg', function() {

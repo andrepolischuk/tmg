@@ -6,7 +6,7 @@
 
 var program = require('commander');
 var moment = require('moment');
-var tmg = require('..');
+var tmg = require('./');
 
 /**
  * Program
@@ -24,13 +24,13 @@ program.on('--help', function() {
   console.log('  Examples:');
   console.log();
   console.log('    # start timer with current time');
-  console.log('    $ tmg');
+  console.log('    tmg');
   console.log();
   console.log('    # start timer with specified time');
-  console.log('    $ tmg 12:15');
+  console.log('    tmg 12:15');
   console.log();
   console.log('    # start timer with specified date and time');
-  console.log('    $ tmg 2015.02.11 12:00:00');
+  console.log('    tmg 2015.02.11 12:00:00');
   console.log();
 });
 
