@@ -1,6 +1,8 @@
-# tmg [![Build Status](https://travis-ci.org/andrepolischuk/tmg.svg?branch=master)](https://travis-ci.org/andrepolischuk/tmg)
+# tmg [![Build Status][travis-image]][travis-url]
 
   > Timer generator
+
+  [tmg-cli][tmg-cli] - CLI for this module
 
 ## Install
 
@@ -41,7 +43,7 @@ var timer = tmg().format('{h}:{m}:{s}');
 ```js
 timer.start(function() {
   this.str(); // '12:00:10'
-})
+});
 ```
 
 ### .end()
@@ -75,3 +77,8 @@ timer.str(); // '12:00:10'
 ## License
 
   MIT
+
+[travis-url]: https://travis-ci.org/andrepolischuk/tmg
+[travis-image]: https://travis-ci.org/andrepolischuk/tmg.svg?branch=master
+
+[tmg-cli]: https://github.com/andrepolischuk/tmg-cli
