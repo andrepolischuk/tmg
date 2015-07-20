@@ -1,29 +1,8 @@
-
 'use strict';
-
-/**
- * Module dependencies
- */
 
 var each = require('ea');
 var type = require('component-type');
-
-/**
- * Math ref
- */
-
-var abs = Math.abs;
-var floor = Math.floor;
-
-/**
- * Def fmt string
- */
-
 var format = '{h}:{m}:{s}';
-
-/**
- * Time props map
- */
 
 var map = {};
 map.s = 1000;
@@ -31,19 +10,7 @@ map.m = map.s * 60;
 map.h = map.m * 60;
 map.d = map.h * 24;
 
-/**
- * Expose Timer
- */
-
 module.exports = Timer;
-
-/**
- * Timer
- *
- * @param {Date} date
- * @return {Object}
- * @api public
- */
 
 function Timer(date) {
   if (!(this instanceof Timer)) return new Timer(date);
@@ -53,26 +20,10 @@ function Timer(date) {
   this._running = false;
 }
 
-/**
- * Set format string
- *
- * @param {String} str
- * @return {Object}
- * @api public
- */
-
 Timer.prototype.format = function(str) {
   this._format = str;
   return this;
 };
-
-/**
- * Start timer interval
- *
- * @param  {Function} fn
- * @return {Object}
- * @api public
- */
 
 Timer.prototype.start = function(fn) {
   if (this._running) return this;
@@ -89,48 +40,25 @@ Timer.prototype.start = function(fn) {
   return this;
 };
 
-/**
- * Clear timer interval
- *
- * @return {Object}
- * @api public
- */
-
 Timer.prototype.end = function() {
   this._running = false;
   return this;
 };
 
-/**
- * Current time object
- *
- * @param {String} str
- * @return {Object}
- * @api public
- */
-
 Timer.prototype.obj = function(str) {
   str = str || this._format;
-  var cur = abs((new Date()).valueOf() - this._date.valueOf());
+  var cur = Math.abs((new Date()).valueOf() - this._date.valueOf());
   var time = {};
 
   each.reverse(map, function(mult, prop) {
     if (str.indexOf('{' + prop + '}') > -1) {
-      time[prop] = floor(cur / mult);
+      time[prop] = Math.floor(cur / mult);
       cur -= time[prop] * mult;
     }
   });
 
   return time;
 };
-
-/**
- * Current time array
- *
- * @param {String} str
- * @return {Array}
- * @api public
- */
 
 Timer.prototype.arr = function(str) {
   var cur = this.obj(str);
@@ -142,14 +70,6 @@ Timer.prototype.arr = function(str) {
 
   return time;
 };
-
-/**
- * Current time string
- *
- * @param {String} str
- * @return {String}
- * @api public
- */
 
 Timer.prototype.str = function(str) {
   var cur = this.obj(str);

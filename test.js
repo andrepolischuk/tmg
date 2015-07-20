@@ -1,15 +1,7 @@
-
 'use strict';
 
 var tmg = require('./');
 var assert = require('assert');
-
-describe('tmg', function() {
-  it('should return function', function() {
-    assert(typeof tmg === 'function');
-  });
-});
-
 var timer = tmg().format('{m}:{s}');
 var sec = timer.obj().s;
 
@@ -22,14 +14,14 @@ describe('tmg()', function() {
   });
 });
 
-describe('Timer#format(str)', function() {
+describe('.format(str)', function() {
   it('should set format string', function() {
     timer.format('{h}:{m}:{s}');
     assert(timer._format === '{h}:{m}:{s}');
   });
 });
 
-describe('Timer#start(fn)', function() {
+describe('.start(fn)', function() {
   it('should set timer interval', function(done) {
     var seconds = 0;
 
@@ -45,7 +37,7 @@ describe('Timer#start(fn)', function() {
   });
 });
 
-describe('Timer#end()', function() {
+describe('.end()', function() {
   it('should clear timer interval', function(done) {
     this.timeout(3000);
     var seconds = 0;
@@ -62,7 +54,7 @@ describe('Timer#end()', function() {
   });
 });
 
-describe('Timer#obj()', function() {
+describe('.obj()', function() {
   it('should return object', function() {
     var obj = timer.obj();
     assert(typeof obj === 'object');
@@ -72,7 +64,7 @@ describe('Timer#obj()', function() {
   });
 });
 
-describe('Timer#arr()', function() {
+describe('.arr()', function() {
   it('should return array', function() {
     var arr = timer.arr();
     assert(typeof arr === 'object');
@@ -80,7 +72,7 @@ describe('Timer#arr()', function() {
   });
 });
 
-describe('Timer#str()', function() {
+describe('.str()', function() {
   it('should return string', function() {
     var str = timer.str();
     assert(typeof str === 'string');
