@@ -76,34 +76,6 @@ timer.arr(); // [12, 0, 10]
 timer.str(); // '12:00:10'
 ```
 
-## CLI
-
-```sh
-npm install --global tmg
-```
-
-```
-tmg --help
-
-  Usage: tmg [date] [time]
-
-  Options:
-
-    -h, --help     output usage information
-    -V, --version  output the version number  
-
-  Examples:
-
-    # start timer with current time
-    $ tmg
-
-    # start timer with specified time
-    $ tmg 12:15
-
-    # start timer with specified date and time
-    $ tmg 2015.02.11 12:00:00
-```
-
 ## License
 
   MIT
