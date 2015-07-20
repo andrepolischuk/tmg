@@ -4,13 +4,15 @@ var each = require('ea');
 var eachReverse = require('each-reverse');
 var msToMoment = require('ms-to-moment');
 var type = require('component-type');
-var format = '{h}:{m}:{s}';
+var format = 'hh:mm:ss';
+var keysRegExp = /(^|\]|\b)([D]|[hms]+)($|\[|\b)/gm;
+var escapedRegExp = /\[([^\[\]]+)\]/gm;
 
 var map = {};
 map.s = 1000;
 map.m = map.s * 60;
 map.h = map.m * 60;
-map.d = map.h * 24;
+map.D = map.h * 24;
 
 module.exports = Timer;
 
@@ -50,10 +52,15 @@ Timer.prototype.end = function() {
 Timer.prototype.obj = function(str) {
   str = str || this._format;
   var cur = msToMoment(this._date);
+  var keys = str.match(keysRegExp);
   var time = {};
 
+  each(keys, function(val, i) {
+    keys[i] = val.charAt(0);
+  });
+
   eachReverse(map, function(mult, prop) {
-    if (str.indexOf('{' + prop + '}') > -1) {
+    if (keys.indexOf(prop) > -1) {
       time[prop] = Math.floor(cur / mult);
       cur -= time[prop] * mult;
     }
@@ -78,9 +85,11 @@ Timer.prototype.str = function(str) {
   var time = str || this._format;
 
   each(cur, function(val, prop) {
-    val = /(h|m|s)/.test(prop) && val < 10 ? '0' + val : val;
-    time = time.replace(new RegExp('{' + prop + '}', 'g'), val);
+    time = time.replace(keysRegExp, function(match) {
+      if (match.charAt(0) !== prop) return match;
+      return /([hms]{2})/.test(match) && val < 10 ? '0' + val : val;
+    });
   });
 
-  return time;
+  return time.replace(escapedRegExp, '$1');
 };

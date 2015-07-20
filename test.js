@@ -2,7 +2,7 @@
 
 var tmg = require('./');
 var assert = require('assert');
-var timer = tmg().format('{m}:{s}');
+var timer = tmg().format('m:s');
 var sec = timer.obj().s;
 
 describe('tmg()', function() {
@@ -16,8 +16,8 @@ describe('tmg()', function() {
 
 describe('.format(str)', function() {
   it('should set format string', function() {
-    timer.format('{h}:{m}:{s}');
-    assert(timer._format === '{h}:{m}:{s}');
+    timer.format('hh:mm:ss');
+    assert(timer._format === 'hh:mm:ss');
   });
 });
 
@@ -77,5 +77,11 @@ describe('.str()', function() {
     var str = timer.str();
     assert(typeof str === 'string');
     assert(/^\d{2}:\d{2}:\d{2}$/.test(str));
+  });
+
+  it('should return string with escaped', function() {
+    var str = timer.str('s [seconds]');
+    assert(typeof str === 'string');
+    assert(/^\d\sseconds$/.test(str));
   });
 });
