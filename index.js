@@ -2,6 +2,7 @@
 
 var each = require('ea');
 var eachReverse = require('each-reverse');
+var msToMoment = require('ms-to-moment');
 var type = require('component-type');
 var format = '{h}:{m}:{s}';
 
@@ -48,7 +49,7 @@ Timer.prototype.end = function() {
 
 Timer.prototype.obj = function(str) {
   str = str || this._format;
-  var cur = Math.abs((new Date()).valueOf() - this._date.valueOf());
+  var cur = msToMoment(this._date);
   var time = {};
 
   eachReverse(map, function(mult, prop) {
