@@ -8,10 +8,6 @@
 npm install --save tmg
 ```
 
-```sh
-component install andrepolischuk/tmg
-```
-
 ## API
 
 ### tmg([date])
