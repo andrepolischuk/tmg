@@ -1,6 +1,7 @@
 'use strict';
 
 var each = require('ea');
+var eachReverse = require('each-reverse');
 var type = require('component-type');
 var format = '{h}:{m}:{s}';
 
@@ -50,7 +51,7 @@ Timer.prototype.obj = function(str) {
   var cur = Math.abs((new Date()).valueOf() - this._date.valueOf());
   var time = {};
 
-  each.reverse(map, function(mult, prop) {
+  eachReverse(map, function(mult, prop) {
     if (str.indexOf('{' + prop + '}') > -1) {
       time[prop] = Math.floor(cur / mult);
       cur -= time[prop] * mult;
