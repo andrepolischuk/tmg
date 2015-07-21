@@ -7,7 +7,6 @@ var type = require('component-type');
 var format = 'hh:mm:ss';
 var keysRegExp = /(^|\]|\b)([D]|[hms]+)($|\[|\b)/gm;
 var escapedRegExp = /\[([^\[\]]+)\]/gm;
-
 var map = {};
 map.s = 1000;
 map.m = map.s * 60;
@@ -18,7 +17,7 @@ module.exports = Timer;
 
 function Timer(date) {
   if (!(this instanceof Timer)) return new Timer(date);
-  if (type(date) !== 'date') return new Timer(new Date());
+  if (type(date) !== 'date') date = new Date();
   this._date = date;
   this._format = format;
   this._running = false;
