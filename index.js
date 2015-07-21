@@ -36,7 +36,7 @@ Timer.prototype.start = function(fn) {
 
   function next() {
     if (!self._running) return;
-    fn.call(self);
+    fn(self);
     setTimeout(next, 1000);
   }
 

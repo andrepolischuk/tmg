@@ -25,9 +25,9 @@ describe('.start(fn)', function() {
   it('should set timer interval', function(done) {
     var seconds = 0;
 
-    tmg().start(function() {
-      seconds = this.obj().s;
-      if (seconds === 1) this.end();
+    tmg().start(function(t) {
+      seconds = t.obj().s;
+      if (seconds === 1) t.end();
     });
 
     setTimeout(function() {
@@ -42,9 +42,9 @@ describe('.end()', function() {
     this.timeout(3000);
     var seconds = 0;
 
-    tmg().start(function() {
-      seconds = this.obj().s;
-      if (seconds === 1) this.end();
+    tmg().start(function(t) {
+      seconds = t.obj().s;
+      if (seconds === 1) t.end();
     });
 
     setTimeout(function() {
