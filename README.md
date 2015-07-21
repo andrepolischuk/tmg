@@ -10,15 +10,28 @@
 npm install --save tmg
 ```
 
+## Usage
+
+```js
+var tmg = require('tmg');
+var date = new Date(2018, 05, 01, 12, 0, 0);
+
+tmg(date)
+  .format('h:mm:ss')
+  .start(function(t) {
+    t.toString();
+  });
+```
+
 ## API
 
 ### tmg([date])
 
-  Return timer
+  Return timer, default `new Date()`
 
 ```js
 var timer = tmg();
-var timer = tmg(new Date(2018, 05, 01, 12, 0, 0));
+var countdown = tmg(new Date(2018, 05, 01, 12, 0, 0));
 ```
 
 ### .format(str)
@@ -26,23 +39,24 @@ var timer = tmg(new Date(2018, 05, 01, 12, 0, 0));
   Set format string
 
 ```js
-var timer = tmg().format('{h}:{m}:{s}');
+tmg().format('D [days] h:mm:ss'); // 4 days 2:00:15
 ```
 
   Can be used:
 
-  * `d` - days
-  * `h` - hours
-  * `m` - minutes
-  * `s` - seconds
+  * `D` - days
+  * `h`, `hh` - hours
+  * `m`, `mm` - minutes
+  * `s`, `ss` - seconds
+  * `[escaped]` - escaped text
 
 ### .start(fn)
 
   Start timer interval
 
 ```js
-timer.start(function() {
-  this.str(); // '12:00:10'
+timer.start(function(t) {
+  t.toString(); // '12:00:10'
 });
 ```
 
@@ -50,28 +64,28 @@ timer.start(function() {
 
   Clear timer interval
 
-### .obj([str])
+### .toObject([str])
 
   Return object with current timer value
 
 ```js
-timer.obj(); // {h: 12, m: 0, s: 10}
+timer.toObject(); // {h: 12, m: 0, s: 10}
 ```
 
-### .arr([str])
+### .toArray([str])
 
   Return object with current timer value
 
 ```js
-timer.arr(); // [12, 0, 10]
+timer.toArray(); // [12, 0, 10]
 ```
 
-### .str([str])
+### .toString([str])
 
   Return string with current timer value
 
 ```js
-timer.str(); // '12:00:10'
+timer.toString(); // '12:00:10'
 ```
 
 ## License
