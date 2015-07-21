@@ -49,7 +49,7 @@ Timer.prototype.end = function() {
   return this;
 };
 
-Timer.prototype.obj = function(str) {
+Timer.prototype.toObject = function(str) {
   str = str || this._format;
   var cur = msToMoment(this._date);
   var keys = str.match(keysRegExp);
@@ -69,8 +69,8 @@ Timer.prototype.obj = function(str) {
   return time;
 };
 
-Timer.prototype.arr = function(str) {
-  var cur = this.obj(str);
+Timer.prototype.toArray = function(str) {
+  var cur = this.toObject(str);
   var time = [];
 
   each(cur, function(val) {
@@ -80,8 +80,8 @@ Timer.prototype.arr = function(str) {
   return time;
 };
 
-Timer.prototype.str = function(str) {
-  var cur = this.obj(str);
+Timer.prototype.toString = function(str) {
+  var cur = this.toObject(str);
   var time = str || this._format;
 
   each(cur, function(val, prop) {
