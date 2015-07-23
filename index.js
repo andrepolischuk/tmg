@@ -1,5 +1,4 @@
 'use strict';
-
 var each = require('ea');
 var eachReverse = require('each-reverse');
 var msToMoment = require('ms-to-moment');
