@@ -1,30 +1,22 @@
-
-'use strict';
-
-var tmg = require('tmg');
-
+import tmg from 'tmg';
 var cyear = document.querySelector('#cyear');
 var nyear = document.querySelector('#nyear');
 var page = document.querySelector('#page');
-
 var year = (new Date()).getFullYear();
 
 tmg(new Date(year, 0, 1))
-  .format('{d} days {h}:{m}:{s}')
-  .start(function() {
-    cyear.innerHTML = this.str();
+  .format('D [days] hh:mm:ss')
+  .start(t => {
+    cyear.innerHTML = t.toString();
   });
 
 tmg(new Date(year + 1, 0, 1))
-  .format('{d} days {h}:{m}:{s}')
-  .start(function() {
-    nyear.innerHTML = this.str();
+  .format('D [days] hh:mm:ss')
+  .start(t => {
+    nyear.innerHTML = t.toString();
   });
 
-tmg().start(function() {
-  page.innerHTML = this.str();
-});
-
-function digits2(val) {
-  return val < 10 ? '0' + val : val;
-}
+tmg()
+  .start(t => {
+    page.innerHTML = t.toString();
+  });

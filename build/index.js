@@ -1,207 +1,30 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-
 'use strict';
 
-var tmg = require('tmg');
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _tmg = require('tmg');
+
+var _tmg2 = _interopRequireDefault(_tmg);
 
 var cyear = document.querySelector('#cyear');
 var nyear = document.querySelector('#nyear');
 var page = document.querySelector('#page');
+var year = new Date().getFullYear();
 
-var year = (new Date()).getFullYear();
-
-tmg(new Date(year, 0, 1))
-  .format('{d} days {h}:{m}:{s}')
-  .start(function() {
-    cyear.innerHTML = this.str();
-  });
-
-tmg(new Date(year + 1, 0, 1))
-  .format('{d} days {h}:{m}:{s}')
-  .start(function() {
-    nyear.innerHTML = this.str();
-  });
-
-tmg().start(function() {
-  page.innerHTML = this.str();
+(0, _tmg2['default'])(new Date(year, 0, 1)).format('D [days] hh:mm:ss').start(function (t) {
+  cyear.innerHTML = t.toString();
 });
 
-function digits2(val) {
-  return val < 10 ? '0' + val : val;
-}
+(0, _tmg2['default'])(new Date(year + 1, 0, 1)).format('D [days] hh:mm:ss').start(function (t) {
+  nyear.innerHTML = t.toString();
+});
 
-},{"tmg":2}],2:[function(require,module,exports){
+(0, _tmg2['default'])().start(function (t) {
+  page.innerHTML = t.toString();
+});
 
-'use strict';
-
-/**
- * Module dependencies
- */
-
-var each = require('ea');
-
-try {
-  var type = require('type');
-} catch (err) {
-  var type = require('component-type');
-}
-
-/**
- * Math ref
- */
-
-var abs = Math.abs;
-var floor = Math.floor;
-
-/**
- * Def fmt string
- */
-
-var format = '{h}:{m}:{s}';
-
-/**
- * Time props map
- */
-
-var map = {};
-map.s = 1000;
-map.m = map.s * 60;
-map.h = map.m * 60;
-map.d = map.h * 24;
-
-/**
- * Expose Timer
- */
-
-module.exports = Timer;
-
-/**
- * Timer
- *
- * @param {Date} date
- * @return {Object}
- * @api public
- */
-
-function Timer(date) {
-  if (!(this instanceof Timer)) return new Timer(date);
-  if (type(date) !== 'date') return new Timer(new Date());
-  this._date = date;
-  this._format = format;
-  this._running = false;
-}
-
-/**
- * Set format string
- *
- * @param {String} str
- * @return {Object}
- * @api public
- */
-
-Timer.prototype.format = function(str) {
-  this._format = str;
-  return this;
-};
-
-/**
- * Start timer interval
- *
- * @param  {Function} fn
- * @return {Object}
- * @api public
- */
-
-Timer.prototype.start = function(fn) {
-  if (this._running) return this;
-  this._running = true;
-  var self = this;
-
-  function next() {
-    if (!self._running) return;
-    fn.call(self);
-    setTimeout(next, 1000);
-  }
-
-  next();
-  return this;
-};
-
-/**
- * Clear timer interval
- *
- * @return {Object}
- * @api public
- */
-
-Timer.prototype.end = function() {
-  this._running = false;
-  return this;
-};
-
-/**
- * Current time object
- *
- * @param {String} str
- * @return {Object}
- * @api public
- */
-
-Timer.prototype.obj = function(str) {
-  str = str || this._format;
-  var cur = abs((new Date()).valueOf() - this._date.valueOf());
-  var time = {};
-
-  each.reverse(map, function(mult, prop) {
-    if (str.indexOf('{' + prop + '}') > -1) {
-      time[prop] = floor(cur / mult);
-      cur -= time[prop] * mult;
-    }
-  });
-
-  return time;
-};
-
-/**
- * Current time array
- *
- * @param {String} str
- * @return {Array}
- * @api public
- */
-
-Timer.prototype.arr = function(str) {
-  var cur = this.obj(str);
-  var time = [];
-
-  each(cur, function(val) {
-    time.push(val);
-  });
-
-  return time;
-};
-
-/**
- * Current time string
- *
- * @param {String} str
- * @return {String}
- * @api public
- */
-
-Timer.prototype.str = function(str) {
-  var cur = this.obj(str);
-  var time = str || this._format;
-
-  each(cur, function(val, prop) {
-    val = /(h|m|s)/.test(prop) && val < 10 ? '0' + val : val;
-    time = time.replace(new RegExp('{' + prop + '}', 'g'), val);
-  });
-
-  return time;
-};
-
-},{"component-type":3,"ea":4,"type":3}],3:[function(require,module,exports){
+},{"tmg":6}],2:[function(require,module,exports){
 /**
  * toString ref.
  */
@@ -237,13 +60,8 @@ module.exports = function(val){
   return typeof val;
 };
 
-},{}],4:[function(require,module,exports){
-
+},{}],3:[function(require,module,exports){
 'use strict';
-
-/**
- * Module dependencies
- */
 
 try {
   var type = require('type');
@@ -251,146 +69,196 @@ try {
   var type = require('component-type');
 }
 
-/**
- * Has own property
- */
+module.exports = function(obj, fn) {
+  if (type(fn) !== 'function') return;
 
-var has = Object.prototype.hasOwnProperty;
-
-/**
- * Expose direct iterate
- */
-
-module.exports = each;
-
-/**
- * Expose reverse iterate
- *
- * @param {Object|Array} obj
- * @param {Function} fn
- * @return {Function}
- * @api public
- */
-
-module.exports.reverse = function(obj, fn) {
-  return each(obj, fn, 'reverse');
-};
-
-/**
- * Iteration router
- *
- * @param {Object|Array} obj
- * @param {Function} fn
- * @return {Function}
- * @api public
- */
-
-function each(obj, fn, direction) {
-  if (typeof fn === 'function') {
-    switch (type(obj)) {
-      case 'array':
-        return (array[direction] || array)(obj, fn);
-      case 'object':
-        if (type(obj.length) === 'number') {
-          return (array[direction] || array)(obj, fn);
-        }
-        return (object[direction] || object)(obj, fn);
-      case 'string':
-        return (string[direction] || string)(obj, fn);
-    }
+  switch (type(obj)) {
+    case 'array':
+      return array(obj, fn);
+    case 'object':
+      if (type(obj.length) === 'number') return array(obj, fn);
+      return object(obj, fn);
+    case 'string':
+      return string(obj, fn);
   }
-}
-
-/**
- * Iterate array
- *
- * @param {Array} obj
- * @param {Function} fn
- * @api private
- */
+};
 
 function array(obj, fn) {
-  for (var i = 0; i < obj.length; i++) {
+  for (var i = 0, len = obj.length; i < len; i++) {
     fn(obj[i], i);
   }
 }
-
-/**
- * Iterate array in reverse order
- *
- * @param {Array} obj
- * @param {Function} fn
- * @api private
- */
-
-array.reverse = function(obj, fn) {
-  for (var i = obj.length - 1; i >= 0; i--) {
-    fn(obj[i], i);
-  }
-};
-
-/**
- * Iterate object
- *
- * @param {Object} obj
- * @param {Function} fn
- * @api private
- */
 
 function object(obj, fn) {
   for (var i in obj) {
-    if (has.call(obj, i)) {
+    if (obj.hasOwnProperty(i)) {
       fn(obj[i], i);
     }
   }
 }
 
-/**
- * Iterate object in reverse order
- *
- * @param {Object} obj
- * @param {Function} fn
- * @api private
- */
-
-object.reverse = function(obj, fn) {
-  var keys = [];
-  for (var k in obj) {
-    if (has.call(obj, k)) {
-      keys.push(k);
-    }
-  }
-  for (var i = keys.length - 1; i >= 0; i--) {
-    fn(obj[keys[i]], keys[i]);
-  }
-};
-
-/**
- * Iterate string
- *
- * @param {Array} obj
- * @param {Function} fn
- * @api private
- */
-
 function string(obj, fn) {
-  for (var i = 0; i < obj.length; i++) {
+  for (var i = 0, len = obj.length; i < len; i++) {
     fn(obj.charAt(i), i);
   }
 }
 
-/**
- * Iterate string in reverse order
- *
- * @param {Array} obj
- * @param {Function} fn
- * @api private
- */
+},{"component-type":2,"type":2}],4:[function(require,module,exports){
+'use strict';
 
-string.reverse = function(obj, fn) {
-  for (var i = obj.length - 1; i >= 0; i--) {
-    fn(obj.charAt(i), i);
+try {
+  var type = require('type');
+} catch (err) {
+  var type = require('component-type');
+}
+
+module.exports = function(obj, fn) {
+  if (type(fn) !== 'function') return;
+
+  switch (type(obj)) {
+    case 'array':
+      return array(obj, fn);
+    case 'object':
+      if (type(obj.length) === 'number') return array(obj, fn);
+      return object(obj, fn);
+    case 'string':
+      return string(obj, fn);
   }
 };
 
-},{"component-type":3,"type":3}]},{},[1]);
+function array(obj, fn) {
+  for (var i = obj.length - 1; i >= 0; i--) {
+    fn(obj[i], i);
+  }
+}
+
+function object(obj, fn) {
+  var keys = [];
+
+  for (var k in obj) {
+    if (obj.hasOwnProperty(k)) {
+      keys.push(k);
+    }
+  }
+
+  for (var i = keys.length - 1; i >= 0; i--) {
+    fn(obj[keys[i]], keys[i]);
+  }
+}
+
+function string(obj, fn) {
+  for (var i = obj.length - 1; i >= 0; i--) {
+    fn(obj.charAt(i), i);
+  }
+}
+
+},{"component-type":2,"type":2}],5:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports["default"] = function (date) {
+  return Math.abs(new Date().valueOf() - date.valueOf());
+};
+
+module.exports = exports["default"];
+
+
+},{}],6:[function(require,module,exports){
+'use strict';
+var each = require('ea');
+var eachReverse = require('each-reverse');
+var msToMoment = require('ms-to-moment');
+var type = require('component-type');
+var format = 'hh:mm:ss';
+var keysRegExp = /(^|\]|\b)([D]|[hms]+)($|\[|\b)/gm;
+var escapedRegExp = /\[([^\[\]]+)\]/gm;
+var map = {};
+map.s = 1000;
+map.m = map.s * 60;
+map.h = map.m * 60;
+map.D = map.h * 24;
+
+module.exports = Timer;
+
+function Timer(date) {
+  if (!(this instanceof Timer)) return new Timer(date);
+  if (type(date) !== 'date') date = new Date();
+  this._date = date;
+  this._format = format;
+  this._running = false;
+}
+
+Timer.prototype.format = function(str) {
+  this._format = str;
+  return this;
+};
+
+Timer.prototype.start = function(fn) {
+  if (this._running) return this;
+  this._running = true;
+  var self = this;
+
+  function next() {
+    if (!self._running) return;
+    fn(self);
+    setTimeout(next, 1000);
+  }
+
+  next();
+  return this;
+};
+
+Timer.prototype.end = function() {
+  this._running = false;
+  return this;
+};
+
+Timer.prototype.toObject = function(str) {
+  str = str || this._format;
+  var cur = msToMoment(this._date);
+  var keys = str.match(keysRegExp);
+  var time = {};
+
+  each(keys, function(val, i) {
+    keys[i] = val.charAt(0);
+  });
+
+  eachReverse(map, function(mult, prop) {
+    if (keys.indexOf(prop) > -1) {
+      time[prop] = Math.floor(cur / mult);
+      cur -= time[prop] * mult;
+    }
+  });
+
+  return time;
+};
+
+Timer.prototype.toArray = function(str) {
+  var cur = this.toObject(str);
+  var time = [];
+
+  each(cur, function(val) {
+    time.push(val);
+  });
+
+  return time;
+};
+
+Timer.prototype.toString = function(str) {
+  var cur = this.toObject(str);
+  var time = str || this._format;
+
+  each(cur, function(val, prop) {
+    time = time.replace(keysRegExp, function(match) {
+      if (match.charAt(0) !== prop) return match;
+      return /([hms]{2})/.test(match) && val < 10 ? '0' + val : val;
+    });
+  });
+
+  return time.replace(escapedRegExp, '$1');
+};
+
+},{"component-type":2,"ea":3,"each-reverse":4,"ms-to-moment":5}]},{},[1]);
