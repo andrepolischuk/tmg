@@ -1,7 +1,7 @@
 {
   "name": "tmg",
   "description": "Timer generator",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "keywords": [
     "timer",
     "generator"
